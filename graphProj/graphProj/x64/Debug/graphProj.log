@@ -1,0 +1,21 @@
+﻿  Graphics.cpp
+c:\users\david\source\repos\graphproj\graphproj\graphics.cpp(195): warning C4244: =: преобразование "int" в "FLOAT", возможна потеря данных
+c:\users\david\source\repos\graphproj\graphproj\graphics.cpp(196): warning C4244: =: преобразование "int" в "FLOAT", возможна потеря данных
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\memory(2538): warning C4267: инициализация: преобразование из "size_t" в "_Ty"; возможна потеря данных
+          with
+          [
+              _Ty=UINT
+          ]
+  c:\users\david\source\repos\graphproj\graphproj\vertexbuffer.h(48): note: выполняется компиляция ссылки на экземпляр шаблон функции "std::unique_ptr<UINT,std::default_delete<_Ty>> std::make_unique<UINT,size_t,0>(size_t &&)"
+          with
+          [
+              _Ty=UINT
+          ]
+  c:\users\david\source\repos\graphproj\graphproj\vertexbuffer.h(46): note: при компиляции функции-члена "<Нет данных>" класса класс <Нет данных>
+  c:\users\david\source\repos\graphproj\graphproj\graphics.cpp(273): note: выполняется компиляция ссылки на экземпляр шаблон функции "HRESULT VertexBuffer<Vertex>::Initialize(ID3D11Device *,T *,UINT)"
+          with
+          [
+              T=Vertex
+          ]
+  c:\users\david\source\repos\graphproj\graphproj\graphics.h(34): note: выполняется компиляция ссылки на экземпляр шаблон класс "VertexBuffer<Vertex>"
+  graphProj.vcxproj -> C:\Users\david\source\repos\graphProj\x64\Debug\graphProj.exe

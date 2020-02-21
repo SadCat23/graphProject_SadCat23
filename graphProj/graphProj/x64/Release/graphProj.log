@@ -1,0 +1,9 @@
+﻿  RenderWindow.cpp
+c:\users\david\source\repos\graphproj\graphproj\renderwindow.cpp(35): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+c:\users\david\source\repos\graphproj\graphproj\renderwindow.cpp(34): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+  Создание кода
+  0 of 211 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  graphProj.vcxproj -> C:\Users\david\source\repos\graphProj\x64\Release\graphProj.exe
