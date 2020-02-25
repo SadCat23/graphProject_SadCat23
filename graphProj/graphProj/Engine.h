@@ -1,5 +1,6 @@
 #pragma once
 #include "WindowContainer.h"
+#include "Timer.h"
 class Engine : WindowContainer
 {
 
@@ -8,5 +9,7 @@ public:
 	bool ProcessMessage();
 	void Update();
 	void RenderFrame();
-
+	Model* AddModel(XMFLOAT3 pos, Model* parent, XMFLOAT3 color);
+private:
+	Timer timer;
 };

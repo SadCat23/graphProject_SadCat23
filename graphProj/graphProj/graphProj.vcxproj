@@ -169,9 +169,11 @@
     <ClCompile Include="Input\Keyboard\KeyboardInputEvent.cpp" />
     <ClCompile Include="Input\Mouse\MouseInput.cpp" />
     <ClCompile Include="Input\Mouse\MouseInputEvent.cpp" />
+    <ClCompile Include="model.cpp" />
     <ClCompile Include="RenderWindow.cpp" />
     <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="StringConverter.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="WindowContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -187,9 +189,11 @@
     <ClInclude Include="Input\Keyboard\KeyboardInputEvent.h" />
     <ClInclude Include="Input\Mouse\MouseInput.h" />
     <ClInclude Include="Input\Mouse\MouseInputEvent.h" />
+    <ClInclude Include="model.h" />
     <ClInclude Include="RenderWindow.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="StringConverter.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="WindowContainer.h" />

@@ -1,20 +1,20 @@
 #pragma once
 #include "AdapterReader.h"
 #include "Shaders.h"
-#include "Vertex.h"
 #include "SpriteBatch.h"
 #include "SpriteFont.h"
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
-#include "ConstantBuffer.h"
 #include "Camera.h"
-
+#include "model.h"
+#include "Timer.h"
+#include <vector>
 class Graphics
 {
 public: 
 	bool Init(HWND hwnd, int width, int height);
 	void RenderFrame();
 	Camera myCamera;
+	std::vector <Model*>  models;
+	Model* AddModel(XMFLOAT3 pos, Model* parent, XMFLOAT3 color);
 private:
 	bool InitDirecrX(HWND hwnd);
 	bool InitShaders();
@@ -25,14 +25,13 @@ private:
 	Microsoft::WRL::ComPtr <ID3D11RenderTargetView> rtv;
 	Microsoft::WRL::ComPtr <ID3D11Device> device;
 
-	ConstantBuffer<CB_VS_vertexshader> constBuffer;
+	ConstantBuffer<CB_VS_vertexshader> constBuffer_vertex;
 	VertexShader vertexSh;
 	PixelShader pixelSh;
 	
 
 
-	VertexBuffer<Vertex> vertexBuffer;
-	IndexBuffer indecesBuffer;
+	
 
 
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> depthStencilView;
@@ -52,5 +51,6 @@ private:
 	int windowHeight = 0;
 
 
+	Timer fpsTimer;
 
 };

@@ -4,7 +4,7 @@ bool Graphics::Init(HWND hwnd, int width, int height)
 {
 	this->windowWidth = width;
 	this->windowHeight = height;
-	
+	this->fpsTimer.Start();
 	if (!InitDirecrX(hwnd))
 		return false;
 
@@ -37,35 +37,39 @@ void Graphics::RenderFrame()
 	UINT offset = 0;
 
 	//UpdateConstantBuffer
-	XMMATRIX world = XMMatrixIdentity();
-	
-	constBuffer.data.mat = world * myCamera.GetViewMatrix() * myCamera.GetProjectionMatrix();
-	constBuffer.data.mat = DirectX::XMMatrixTranspose(constBuffer.data.mat);
 
-
-
-	if (!constBuffer.ApplyChanges())
+	for (int i = 0; i < models.size(); i++)
 	{
-		return;
+		models[i]->Draw(myCamera.GetViewMatrix()*myCamera.GetProjectionMatrix());
 	}
-	
-	
-	this->context->VSSetConstantBuffers(0, 1, constBuffer.GetAddressOf());
-
-
-	
-	this->context->IASetVertexBuffers(0, 1, vertexBuffer.GetAddressOf(), vertexBuffer.StridePtr(), &offset);
-	this->context->IASetIndexBuffer(indecesBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
-	this->context->DrawIndexed(indecesBuffer.BufferSize(),0,0);
-
+	static int fpsCounter = 0;
+	static std::string fpsString = "FPS: 0";
+	fpsCounter += 1;
+	if (fpsTimer.GetMilisecondsElapsed() > 1000.0)
+	{
+		fpsString = "FPS: " + std::to_string(fpsCounter);
+		fpsCounter = 0;
+		fpsTimer.Restart();
+	}
 	//TExt
 
 	spriteBatch->Begin();
-	
+	spriteFont->DrawString(spriteBatch.get(), StringConverter::StringToWide(fpsString).c_str(), DirectX::XMFLOAT2(1400, 0), DirectX::Colors::White, 0.0f, DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT2(1.0f, 1.0f));
 	spriteFont->DrawString(spriteBatch.get(), L"By SadCat", DirectX::XMFLOAT2(0, 0), DirectX::Colors::White, 0.0f, DirectX::XMFLOAT2(0, 0), DirectX::XMFLOAT2(1, 1));
 	spriteBatch->End();
 
 	this->swapChain->Present(1, NULL);
+}
+
+Model* Graphics::AddModel(XMFLOAT3 pos, Model* parent, XMFLOAT3 color)
+{
+	Model* newModel = new Model();
+	newModel->Initialize(this->device.Get(), this->context.Get(), this->constBuffer_vertex, color);
+	newModel->SetParent (parent);
+	newModel->SetPosition(pos);
+	models.push_back(newModel);
+	return newModel;
+		
 }
 
 bool Graphics::InitDirecrX(HWND hwnd)
@@ -262,44 +266,8 @@ bool Graphics::InitShaders()
 bool Graphics::InitScene()
 {
 
-	Vertex v[] =
-	{
-		Vertex(-0.5f,  -0.5f, 0.0f, 1.0f, 0.0f, 1.0f), //Bottom Left   - [0]
-		Vertex(-0.5f,   0.5f, 0.0f, 1.0f, 0.0f, 0.0f), //Top Left      - [1]
-		Vertex(0.5f,   0.5f, 0.0f, 1.0f, 1.0f, 0.0f), //Top Right     - [2]
-		Vertex(0.5f,  -0.5f, 0.0f, 1.0f, 1.0f, 1.0f), //Bottom Right   - [3]
-	};
-
-	HRESULT hr = this->vertexBuffer.Initialize(this->device.Get(), v, ARRAYSIZE(v));
-	if (FAILED(hr))
-	{
-		ErrorLogger::Log(hr, "Failed to create vertex buffer.");
-		return false;
-	}
-
-
-	DWORD indeces[] =
-	{
-		0,1,2,
-		0,2,3
-	};
-
-
-	hr = this->indecesBuffer.Initialize(this->device.Get(), indeces, ARRAYSIZE(indeces));
-	if (FAILED(hr))
-	{
-		ErrorLogger::Log(hr, "Failed to create indices buffer.");
-		return hr;
-	}
-
-
-	hr = this->constBuffer.Initialize(this->device.Get(), this->context.Get());
-	if (FAILED(hr))
-	{
-		ErrorLogger::Log(hr, "Failed to initialize constant buffer.");
-		return false;
-	}
-
+	//Initialize Constant Buffer(s)
+	HRESULT hr = this->constBuffer_vertex.Initialize(this->device.Get(), this->context.Get());
 
 
 	myCamera.SetPosition(0.0f, 0.0f, -2.0f);
