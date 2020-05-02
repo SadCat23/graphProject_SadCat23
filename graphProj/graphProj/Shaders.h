@@ -1,6 +1,6 @@
 #pragma once
 #include "ErrorLoger.h"
-#pragma comment(lib, "d3dcompiler.lib")
+
 #include <d3d11.h>
 #include<wrl/client.h>
 #include <d3dcompiler.h>

@@ -19,6 +19,12 @@ bool Graphics::Init(HWND hwnd, int width, int height)
 
 void Graphics::RenderFrame()
 {
+
+	light[0]->RenderLight();
+	//light[1]->RenderLight();
+	//this->context->PSSetConstantBuffers(0, 1, this->constBuffer_light.GetAddressOf());
+
+
 	float bgcolor[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 	
 	this->context->ClearRenderTargetView(this->rtv.Get(), bgcolor);
@@ -27,9 +33,10 @@ void Graphics::RenderFrame()
 
 	this->context->IASetInputLayout(this->vertexSh.GetInputLayout());
 	this->context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
 	this->context->RSSetState(this->rasterizerState.Get());
+	this->context->OMSetBlendState(NULL, NULL, 0xFFFFFFFF);
 	this->context->OMSetDepthStencilState(this->depthStencilState.Get(), 0);
+	this->context->PSSetSamplers(0, 1, this->samplerState.GetAddressOf());
 	this->context->VSSetShader(vertexSh.GetShader(), NULL, 0);
 	this->context->PSSetShader(pixelSh.GetShader(), NULL, 0);
 
@@ -38,9 +45,13 @@ void Graphics::RenderFrame()
 
 	//UpdateConstantBuffer
 
-	for (int i = 0; i < models.size(); i++)
+	/*for (int i = 0; i < models.size(); i++)
 	{
 		models[i]->Draw(myCamera.GetViewMatrix()*myCamera.GetProjectionMatrix());
+	}*/
+	for (int i = 0; i < GameObjects.size(); i++)
+	{
+		GameObjects[i]->Draw(myCamera.GetViewMatrix()*myCamera.GetProjectionMatrix());
 	}
 	static int fpsCounter = 0;
 	static std::string fpsString = "FPS: 0";
@@ -70,6 +81,38 @@ Model* Graphics::AddModel(XMFLOAT3 pos, Model* parent, XMFLOAT3 color)
 	models.push_back(newModel);
 	return newModel;
 		
+}
+
+GameObject* Graphics::AddGameObject(XMFLOAT3 pos, GameObject* parent, const std::string & filePath, Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> texture)
+{
+	
+	GameObject* newGameObject = new GameObject();
+	HRESULT hr = newGameObject->Initialize(filePath,this->device.Get(), this->context.Get(), texture.Get() ,this->constBuffer_vertex);
+	if (FAILED(hr)) //If error occurred
+	{
+		ErrorLogger::Log(hr, "Failed load model");
+	
+	}
+	newGameObject->SetParent(parent);
+	newGameObject->SetPosition(pos);
+	GameObjects.push_back(newGameObject);
+	return newGameObject;
+
+}
+
+GameObject * Graphics::AddLight(XMFLOAT3 pos, GameObject * parent)
+{
+	Light* newLight = new Light();
+	HRESULT hr = newLight->Initialize(this->device.Get(), this->context.Get(), this->Grass.Get(),this->constBuffer_vertex, this->constBuffer_light);
+	if (FAILED(hr)) //If error occurred
+	{
+		ErrorLogger::Log(hr, "Failed load model");
+
+	}
+	newLight->SetParent(parent);
+	newLight->SetPosition(pos);
+	GameObjects.push_back(newLight);
+	return newLight;
 }
 
 bool Graphics::InitDirecrX(HWND hwnd)
@@ -219,6 +262,19 @@ bool Graphics::InitDirecrX(HWND hwnd)
 
 
 
+	CD3D11_SAMPLER_DESC sampDesc(D3D11_DEFAULT);
+	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	hr = this->device->CreateSamplerState(&sampDesc, this->samplerState.GetAddressOf()); //Create sampler state
+
+
+
+
+
+
+
+
 
 	return true;
 }
@@ -248,15 +304,16 @@ bool Graphics::InitShaders()
 	D3D11_INPUT_ELEMENT_DESC layout[] =
 	{
 		{"POSITION", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  },
-		{"COLOR", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0,D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  },
+		{"TEXCOORD", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  },
+		{"NORMAL", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  }
 	};
 
 	UINT numElements = ARRAYSIZE(layout);
 
-	if (!vertexSh.Init(this->device, shaderfolder + L"vertexshader.cso", layout, numElements))
+	if (!vertexSh.Init(this->device, shaderfolder + L"vertexShader_Texture.cso", layout, numElements))
 		return false;
 
-	if (!pixelSh.Init(this->device, shaderfolder + L"pixelshader.cso"))
+	if (!pixelSh.Init(this->device, shaderfolder + L"pixelShader_Texture.cso"))
 		return false;
 
 
@@ -268,9 +325,53 @@ bool Graphics::InitScene()
 
 	//Initialize Constant Buffer(s)
 	HRESULT hr = this->constBuffer_vertex.Initialize(this->device.Get(), this->context.Get());
+	if (FAILED(hr))
+	{
+		ErrorLogger::Log(hr, "Failed to create constBuffer_vertex");
+		return false;
+	}
+	hr = this->constBuffer_light.Initialize(this->device.Get(), this->context.Get());
+	if (FAILED(hr))
+	{
+		ErrorLogger::Log(hr, "Failed to create constBuffer_light");
+		return false;
+	}
+
+	this->constBuffer_light.data.ambientLoghtColor = XMFLOAT3(1.0f, 1.0f, 1.0f);
+	this->constBuffer_light.data.ambientStrength = 0.5f;
 
 
-	myCamera.SetPosition(0.0f, 0.0f, -2.0f);
+	hr = DirectX::CreateWICTextureFromFile(this->device.Get(), L"Data\\Textures\\starDeath.jpeg", nullptr, StarDeath.GetAddressOf());
+	if (FAILED(hr))
+	{
+		ErrorLogger::Log(hr, "Failed to create texture from starDeath");
+		return false;
+	}
+	hr = DirectX::CreateWICTextureFromFile(this->device.Get(), L"Data\\Textures\\text1_PNG.png", nullptr, Ogon.GetAddressOf());
+	if (FAILED(hr))
+	{
+		ErrorLogger::Log(hr, "Failed to create texture from text1_PNG");
+		return false;
+	}
+	hr = DirectX::CreateWICTextureFromFile(this->device.Get(), L"Data\\Textures\\mettal.jpg", nullptr, Mettal.GetAddressOf());
+	if (FAILED(hr))
+	{
+		ErrorLogger::Log(hr, "Failed to create texture from mettal");
+		return false;
+	}
+	hr = DirectX::CreateWICTextureFromFile(this->device.Get(), L"Data\\Textures\\grass2.jpg", nullptr, Grass.GetAddressOf());
+	if (FAILED(hr))
+	{
+		ErrorLogger::Log(hr, "Failed to create texture from mettal");
+		return false;
+	}
+	
+	
+	
+	myCamera.SetPosition(0.0f, 5.0f, -4.0f);
+	myCamera.SetRotation(0.9f, 0.0f, 0.0f);
+
 	myCamera.SetProjectionValues(60.0f, static_cast<float>(windowWidth) / static_cast<float>(windowHeight), 0.1f, 1000.0f);
 	return true;
 }
+

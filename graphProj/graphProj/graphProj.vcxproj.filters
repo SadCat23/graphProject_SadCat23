@@ -25,6 +25,12 @@
     <Filter Include="Файлы заголовков\graph">
       <UniqueIdentifier>{070429cd-0fe4-4f30-87b3-42853072f63d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\game">
+      <UniqueIdentifier>{781d97da-a62e-4408-b9d2-01bd6eb8960d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\game">
+      <UniqueIdentifier>{541f2ecb-bb22-4ed4-8027-20850def1507}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="graphProj.cpp">
@@ -73,6 +79,24 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="WindowContainer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="modelWithTexture.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="KatamariaGame.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="BoundSphere.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -137,12 +161,48 @@
     <ClInclude Include="Timer.h">
       <Filter>Файлы заголовков\graph</Filter>
     </ClInclude>
+    <ClInclude Include="Vertex_Texture.h">
+      <Filter>Файлы заголовков\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="modelWithTexture.h">
+      <Filter>Файлы заголовков\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Файлы заголовков\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereKatamaria.h">
+      <Filter>Файлы заголовков\game</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectKatamaria.h">
+      <Filter>Файлы заголовков\game</Filter>
+    </ClInclude>
+    <ClInclude Include="KatamariaGame.h">
+      <Filter>Файлы заголовков\game</Filter>
+    </ClInclude>
+    <ClInclude Include="KatamariaScene.h">
+      <Filter>Файлы заголовков\game</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundSphere.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="vertexshader.hlsl">
       <Filter>Исходные файлы</Filter>
     </FxCompile>
     <FxCompile Include="pixelshader.hlsl">
+      <Filter>Исходные файлы</Filter>
+    </FxCompile>
+    <FxCompile Include="pixelShader_Texture.hlsl">
+      <Filter>Исходные файлы</Filter>
+    </FxCompile>
+    <FxCompile Include="vertexShader_Texture.hlsl">
       <Filter>Исходные файлы</Filter>
     </FxCompile>
   </ItemGroup>

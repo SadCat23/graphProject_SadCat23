@@ -1,7 +1,56 @@
-﻿  graphProj.cpp
-c:\users\david\source\repos\graphproj\graphproj\graphproj.cpp(26): warning C4305: аргумент: усечение из "double" в "float"
-c:\users\david\source\repos\graphproj\graphproj\graphproj.cpp(28): warning C4305: аргумент: усечение из "double" в "float"
-c:\users\david\source\repos\graphproj\graphproj\graphproj.cpp(38): warning C4305: аргумент: усечение из "double" в "float"
-c:\users\david\source\repos\graphproj\graphproj\graphproj.cpp(46): warning C4305: аргумент: усечение из "double" в "float"
-c:\users\david\source\repos\graphproj\graphproj\graphproj.cpp(49): warning C4305: аргумент: усечение из "double" в "float"
-  graphProj.vcxproj -> C:\Users\david\source\repos\graphProj\x64\Debug\graphProj.exe
+﻿  compilation object save succeeded; see C:\Users\david\graphProject_SadCat23\graphProj\x64\Debug\pixelshader.cso
+C:\Users\david\graphProject_SadCat23\graphProj\graphProj\pixelShader_Texture.hlsl(28,12-77): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\david\graphProject_SadCat23\graphProj\x64\Debug\pixelShader_Texture.cso
+  compilation object save succeeded; see C:\Users\david\graphProject_SadCat23\graphProj\x64\Debug\vertexshader.cso
+C:\Users\david\graphProject_SadCat23\graphProj\graphProj\vertexShader_Texture.hlsl(28,5-80): warning X3206: implicit truncation of vector type
+C:\Users\david\graphProject_SadCat23\graphProj\graphProj\vertexShader_Texture.hlsl(29,5-68): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\david\graphProject_SadCat23\graphProj\x64\Debug\vertexShader_Texture.cso
+  AdapterReader.cpp
+  BoundSphere.cpp
+  Camera.cpp
+c:\users\david\graphproject_sadcat23\graphproj\graphproj\camera.cpp(153): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+c:\users\david\graphproject_sadcat23\graphproj\graphproj\camera.cpp(153): warning C4244: инициализация: преобразование "double" в "const float", возможна потеря данных
+c:\users\david\graphproject_sadcat23\graphproj\graphproj\camera.cpp(154): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+c:\users\david\graphproject_sadcat23\graphproj\graphproj\camera.cpp(160): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+  Engine.cpp
+c:\users\david\graphproject_sadcat23\graphproj\graphproj\engine.cpp(31): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+  ErrorLoger.cpp
+  GameObject.cpp
+  Graphics.cpp
+c:\users\david\graphproject_sadcat23\graphproj\graphproj\graphics.cpp(242): warning C4244: =: преобразование "int" в "FLOAT", возможна потеря данных
+c:\users\david\graphproject_sadcat23\graphproj\graphproj\graphics.cpp(243): warning C4244: =: преобразование "int" в "FLOAT", возможна потеря данных
+  graphProj.cpp
+  KeyboardInput.cpp
+  KeyboardInputEvent.cpp
+  MouseInput.cpp
+  MouseInputEvent.cpp
+  KatamariaGame.cpp
+c:\users\david\graphproject_sadcat23\graphproj\graphproj\katamariagame.cpp(30): warning C4305: аргумент: усечение из "double" в "float"
+c:\users\david\graphproject_sadcat23\graphproj\graphproj\katamariagame.cpp(36): warning C4305: аргумент: усечение из "double" в "float"
+  Light.cpp
+  Mesh.cpp
+c:\users\david\graphproject_sadcat23\graphproj\graphproj\mesh.cpp(7): warning C4267: аргумент: преобразование из "size_t" в "UINT"; возможна потеря данных
+c:\users\david\graphproject_sadcat23\graphproj\graphproj\mesh.cpp(13): warning C4267: аргумент: преобразование из "size_t" в "UINT"; возможна потеря данных
+  model.cpp
+  modelWithTexture.cpp
+c:\users\david\graphproject_sadcat23\graphproj\graphproj\modelwithtexture.cpp(30): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+  RenderWindow.cpp
+  Shaders.cpp
+  StringConverter.cpp
+  Создание кода...
+  Компиляция...
+  Timer.cpp
+  WindowContainer.cpp
+c:\users\david\graphproject_sadcat23\graphproj\graphproj\windowcontainer.cpp(1): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
+  Создание кода...
+c:\users\david\graphproject_sadcat23\graphproj\graphproj\windowcontainer.cpp(184): warning C4715: WindowContainer::WindowProc: значение возвращается не при всех путях выполнения
+DirectXTK.lib(CommonStates.obj) : warning LNK4099: "DirectXTK.pdb" PDB не найден с "DirectXTK.lib(CommonStates.obj)" или на "C:\Users\david\graphProject_SadCat23\graphProj\x64\Debug\DirectXTK.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+DirectXTK.lib(BinaryReader.obj) : warning LNK4099: "DirectXTK.pdb" PDB не найден с "DirectXTK.lib(BinaryReader.obj)" или на "C:\Users\david\graphProject_SadCat23\graphProj\x64\Debug\DirectXTK.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+DirectXTK.lib(pch.obj) : warning LNK4099: "DirectXTK.pdb" PDB не найден с "DirectXTK.lib(pch.obj)" или на "C:\Users\david\graphProject_SadCat23\graphProj\x64\Debug\DirectXTK.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+DirectXTK.lib(SpriteBatch.obj) : warning LNK4099: "DirectXTK.pdb" PDB не найден с "DirectXTK.lib(SpriteBatch.obj)" или на "C:\Users\david\graphProject_SadCat23\graphProj\x64\Debug\DirectXTK.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+DirectXTK.lib(SpriteFont.obj) : warning LNK4099: "DirectXTK.pdb" PDB не найден с "DirectXTK.lib(SpriteFont.obj)" или на "C:\Users\david\graphProject_SadCat23\graphProj\x64\Debug\DirectXTK.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+DirectXTK.lib(VertexTypes.obj) : warning LNK4099: "DirectXTK.pdb" PDB не найден с "DirectXTK.lib(VertexTypes.obj)" или на "C:\Users\david\graphProject_SadCat23\graphProj\x64\Debug\DirectXTK.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+DirectXTK.lib(WICTextureLoader.obj) : warning LNK4099: "DirectXTK.pdb" PDB не найден с "DirectXTK.lib(WICTextureLoader.obj)" или на "C:\Users\david\graphProject_SadCat23\graphProj\x64\Debug\DirectXTK.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+  graphProj.vcxproj -> C:\Users\david\graphProject_SadCat23\graphProj\x64\Debug\graphProj.exe

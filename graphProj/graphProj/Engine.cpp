@@ -1,5 +1,5 @@
 #include "Engine.h"
-
+#include"KatamariaGame.h"
 bool Engine::Initialize(HINSTANCE hInstance, std::string window_title, std::string window_class, int width, int height, float posX, float posY)
 {
 	timer.Start();
@@ -21,9 +21,14 @@ bool Engine::ProcessMessage()
 	return this->render_window.ProcessMessages();
 }
 
+Graphics* Engine::GetGraphicsEngine()
+{
+	return &gfx;
+}
+
 void Engine::Update()
 {
-	float dt = timer.GetMilisecondsElapsed();
+	this->deltaTime = timer.GetMilisecondsElapsed();
 	timer.Restart();
 	while (!keyboardInput.CharBufferIsEmpty())
 	{
@@ -46,56 +51,29 @@ void Engine::Update()
 			}
 		}
 	}
-
-
-	//planet1
-	gfx.models[1]->AdjustRotation(0.0f, 0.001f*dt, 0.0f);
-	gfx.models[1]->AdjustRelativeRotation(0.0f, 0.0001f*dt, 0.0f);
-
-	gfx.models[2]->AdjustRotation(0.0f, 0.0f, 0.001f*dt);
-	gfx.models[2]->AdjustRelativeRotation(0.0f, 0.0f, 0.001f*dt);
 	
-	gfx.models[3]->AdjustRotation(0.0f, 0.001f*dt, 0.0f);
-	gfx.models[3]->AdjustRelativeRotation(0.0f, 0.003f*dt, 0.0f);
-
-	////////////////////////////////////////////////////
-
-	gfx.models[4]->AdjustRotation(0.0f, 0.001f*dt, 0.0f);
-	gfx.models[4]->AdjustRelativeRotation(0.0f, 0.0002f*dt, 0.0f);
-
-	gfx.models[5]->AdjustRotation(0.0f, 0.0f, 0.001f*dt);
-	gfx.models[5]->AdjustRelativeRotation(0.0f, 0.003f*dt, 0.0f );
-	   	 	
-	//////////////////////////
-	gfx.models[6]->AdjustRotation(0.0f, 0.0003f*dt, 0.0f);
-	gfx.models[6]->AdjustRelativeRotation(0.0f, 0.00005f*dt, 0.0f);
-
-	gfx.models[7]->AdjustRotation(0.0f, 0.0f, 0.0001f*dt);
-	gfx.models[7]->AdjustRelativeRotation(0.0f, 0.0f, 0.0003f*dt);
 
 
-	gfx.models[8]->AdjustRotation(0.0f, 0.0f, 0.0001f*dt);
-	gfx.models[8]->AdjustRelativeRotation(0.0f, 0.007f*dt,0.0f );
-
-
+	KatamariaGame::getInstance().GameLoop();
 
 	const float cameraSpeed = 0.02f;
 
 	if (keyboardInput.KeyIsPressed('W'))
-	{
-		this->gfx.myCamera.AdjustPosition(this->gfx.myCamera.GetForwardVector() * cameraSpeed);
+	{	
+		KatamariaGame::getInstance().Input('W');
 	}
 	if (keyboardInput.KeyIsPressed('S'))
 	{
-		this->gfx.myCamera.AdjustPosition(this->gfx.myCamera.GetBackwardVector() * cameraSpeed);
+		KatamariaGame::getInstance().Input('S');
+
 	}
 	if (keyboardInput.KeyIsPressed('A'))
 	{
-		this->gfx.myCamera.AdjustPosition(this->gfx.myCamera.GetLeftVector() * cameraSpeed);
+		KatamariaGame::getInstance().Input('A');
 	}
 	if (keyboardInput.KeyIsPressed('D'))
 	{
-		this->gfx.myCamera.AdjustPosition(this->gfx.myCamera.GetRightVector() * cameraSpeed);
+		KatamariaGame::getInstance().Input('D');
 	}
 	if (keyboardInput.KeyIsPressed(VK_SPACE))
 	{
@@ -117,4 +95,17 @@ Model* Engine::AddModel(XMFLOAT3 pos, Model* parent, XMFLOAT3 color)
 {
 	return gfx.AddModel(pos, parent, color);
 	
+}
+
+GameObject * Engine::AddLight(XMFLOAT3 pos, GameObject * parent)
+{
+	return gfx.AddLight(pos, parent);
+	return nullptr;
+}
+
+GameObject* Engine::AddGameObject(XMFLOAT3 pos, GameObject* parent, const std::string & filePath, Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> texture)
+{
+
+	return gfx.AddGameObject(pos, parent, filePath,texture);
+
 }

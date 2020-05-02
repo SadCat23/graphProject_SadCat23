@@ -1,9 +1,14 @@
-﻿  RenderWindow.cpp
-c:\users\david\source\repos\graphproj\graphproj\renderwindow.cpp(35): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-c:\users\david\source\repos\graphproj\graphproj\renderwindow.cpp(34): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+﻿  KatamariaGame.cpp
   Создание кода
-  0 of 211 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  4 of 1293 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    4 functions had inline decision re-evaluated but remain unchanged
   Создание кода завершено
-  graphProj.vcxproj -> C:\Users\david\source\repos\graphProj\x64\Release\graphProj.exe
+DirectXTK.lib(CommonStates.obj) : warning LNK4099: "DirectXTK.pdb" PDB не найден с "DirectXTK.lib(CommonStates.obj)" или на "C:\Users\magistr\Desktop\graphProjKatamari\x64\Release\DirectXTK.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+DirectXTK.lib(BinaryReader.obj) : warning LNK4099: "DirectXTK.pdb" PDB не найден с "DirectXTK.lib(BinaryReader.obj)" или на "C:\Users\magistr\Desktop\graphProjKatamari\x64\Release\DirectXTK.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+DirectXTK.lib(pch.obj) : warning LNK4099: "DirectXTK.pdb" PDB не найден с "DirectXTK.lib(pch.obj)" или на "C:\Users\magistr\Desktop\graphProjKatamari\x64\Release\DirectXTK.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+DirectXTK.lib(SpriteBatch.obj) : warning LNK4099: "DirectXTK.pdb" PDB не найден с "DirectXTK.lib(SpriteBatch.obj)" или на "C:\Users\magistr\Desktop\graphProjKatamari\x64\Release\DirectXTK.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+DirectXTK.lib(SpriteFont.obj) : warning LNK4099: "DirectXTK.pdb" PDB не найден с "DirectXTK.lib(SpriteFont.obj)" или на "C:\Users\magistr\Desktop\graphProjKatamari\x64\Release\DirectXTK.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+DirectXTK.lib(VertexTypes.obj) : warning LNK4099: "DirectXTK.pdb" PDB не найден с "DirectXTK.lib(VertexTypes.obj)" или на "C:\Users\magistr\Desktop\graphProjKatamari\x64\Release\DirectXTK.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+DirectXTK.lib(WICTextureLoader.obj) : warning LNK4099: "DirectXTK.pdb" PDB не найден с "DirectXTK.lib(WICTextureLoader.obj)" или на "C:\Users\magistr\Desktop\graphProjKatamari\x64\Release\DirectXTK.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+  graphProj.vcxproj -> C:\Users\magistr\Desktop\graphProjKatamari\x64\Release\graphProj.exe
