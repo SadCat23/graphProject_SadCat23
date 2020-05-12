@@ -1,0 +1,17 @@
+﻿  Engine.cpp
+c:\users\david\desktop\build\graphproj\graphproj\engine.cpp(31): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+  GameObject.cpp
+  Graphics.cpp
+c:\users\david\desktop\build\graphproj\graphproj\graphics.cpp(242): warning C4244: =: преобразование "int" в "FLOAT", возможна потеря данных
+c:\users\david\desktop\build\graphproj\graphproj\graphics.cpp(243): warning C4244: =: преобразование "int" в "FLOAT", возможна потеря данных
+  KatamariaGame.cpp
+c:\users\david\desktop\build\graphproj\graphproj\katamariagame.cpp(36): warning C4305: аргумент: усечение из "double" в "float"
+c:\users\david\desktop\build\graphproj\graphproj\katamariagame.cpp(42): warning C4305: аргумент: усечение из "double" в "float"
+  Light.cpp
+  RenderWindow.cpp
+  WindowContainer.cpp
+c:\users\david\desktop\build\graphproj\graphproj\windowcontainer.cpp(1): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
+  graphProj.cpp
+  Создание кода...
+c:\users\david\desktop\build\graphproj\graphproj\windowcontainer.cpp(184): warning C4715: WindowContainer::WindowProc: значение возвращается не при всех путях выполнения
+  graphProj.vcxproj -> C:\Users\david\Desktop\build\graphProj\x64\Debug\graphProj.exe
