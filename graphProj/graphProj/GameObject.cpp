@@ -37,20 +37,13 @@ void GameObject::UpdateWorldMatrix()
 	if (this->parent != nullptr)
 	{
 
-		static float oldX = parent->GetRotationFloat3().x;
-		static float oldZ = parent->GetRotationFloat3().z;
-
-
 		float deltaX = parent->GetRotationFloat3().x - oldX;
 		float deltaZ = parent->GetRotationFloat3().z - oldZ;
-
-		oldX = parent->GetRotationFloat3().x;
-		oldZ = parent->GetRotationFloat3().z;
 
 
 		oldRotate *= XMMatrixRotationX(deltaX);
 		oldRotate *= XMMatrixRotationZ(-deltaZ);
-		
+
 		XMMATRIX scaleMatrix = XMMatrixScaling(this->scale, this->scale, this->scale);
 		this->worldMatrix = scaleMatrix;
 		this->worldMatrix *= XMMatrixRotationRollPitchYaw(this->rot.x, this->rot.y, this->rot.z);
@@ -59,31 +52,34 @@ void GameObject::UpdateWorldMatrix()
 		//this->worldMatrix *= XMMatrixRotationRollPitchYaw(parent->GetRotationFloat3().x, parent->GetRotationFloat3().y, parent->GetRotationFloat3().z);
 		this->worldMatrix *= oldRotate;
 		this->worldMatrix *= XMMatrixTranslation(parent->GetPositionFloat3().x, parent->GetPositionFloat3().y, parent->GetPositionFloat3().z);
-		
+
 		if (parent->parent != nullptr)
 		{
 			this->worldMatrix *= XMMatrixTranslation(parent->parent->GetPositionFloat3().x, parent->parent->GetPositionFloat3().y, parent->parent->GetPositionFloat3().z);
 			this->worldMatrix *= XMMatrixRotationRollPitchYaw(parent->parent->GetRotationRelativeFloat3().x, parent->parent->GetRotationRelativeFloat3().y, parent->parent->GetRotationRelativeFloat3().z);
 		}
 
+
+		oldX = parent->GetRotationFloat3().x;
+		oldZ = parent->GetRotationFloat3().z;
+
+
 	}
 	else
 	{
 		
 	
+
 		this->worldMatrix = XMMatrixScaling(this->scale, this->scale, this->scale);
-		
+
 		//this->worldMatrix *= XMMatrixRotationRollPitchYaw(0, 0, 0);
-		
-		static float oldX = this->rot.x;
-		static float oldZ = this->rot.z;
+
+
 
 
 		float deltaX = this->rot.x - oldX;
 		float deltaZ = this->rot.z - oldZ;
 
-		oldX = this->rot.x;
-		oldZ = this->rot.z;
 
 
 		oldRotate *= XMMatrixRotationX(deltaX);
@@ -91,9 +87,14 @@ void GameObject::UpdateWorldMatrix()
 
 
 		this->worldMatrix *= oldRotate;
-	
+
 		this->worldMatrix *= XMMatrixTranslation(this->pos.x, this->pos.y, this->pos.z);
 		//this->worldMatrix *= XMMatrixRotationRollPitchYaw(this->GetRotationRelativeFloat3().x, this->GetRotationRelativeFloat3().y, this->GetRotationRelativeFloat3().z);
+
+
+
+		oldX = this->rot.x;
+		oldZ = this->rot.z;
 
 	}
 	CalcCenterBound();

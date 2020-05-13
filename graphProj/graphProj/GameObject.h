@@ -6,7 +6,7 @@ class GameObject
 {
 	public:
 
-
+		float oldX, oldZ;
 	virtual  typeObject GetType()
 	{
 		return base;

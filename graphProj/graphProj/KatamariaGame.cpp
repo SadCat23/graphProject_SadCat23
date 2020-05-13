@@ -23,6 +23,12 @@ void KatamariaGame::SpawnObject()
 	newObjects->radiusBound = 1*newObjects->scale;
 	this->objects.push_back(newObjects);
 	
+
+	newObjects = (ObjectKatamaria*)MyUrealEngine->AddGameObject(XMFLOAT3(0.0f, 0.0f, 5.0f), nullptr, "Data\\Objects\\ball\\Ball.obj", this->MyUrealEngine->GetGraphicsEngine()->Ogon);
+	newObjects->justChild = false;
+	newObjects->SetScale(0.5);
+	newObjects->radiusBound = 1 * newObjects->scale;
+	this->objects.push_back(newObjects);
 	
 	
 	Light* light1;
@@ -84,9 +90,12 @@ void KatamariaGame::AddToChild(ObjectKatamaria* obj)
 	vector.y *= InverseLength * (this->sphere->radiusBound + obj->radiusBound);
 	vector.z *= InverseLength * (this->sphere->radiusBound + obj->radiusBound);
 	
-	
+	obj->oldX = obj->parent->GetRotationFloat3().x;
+	obj->oldZ = obj->parent->GetRotationFloat3().z;
+
 	
 	obj->SetPosition(vector.x, vector.y, vector.z);
+
 	this->sphere->childs.push_back(obj);
 	obj->justChild = true;
 }
